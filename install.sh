@@ -1,14 +1,18 @@
 #!/bin/bash
+set -e
 
 DOTFILES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+PACKAGES=(hyprland waybar rofi kitty cava git curl)
 
-echo ":: Deploying dotfiles..."
+echo ":: Installing packages..."
+sudo pacman -S --needed --noconfirm "${PACKAGES[@]}"
 
+echo ":: Linking dotfiles..."
 mkdir -p "$HOME/.config"
 
 for config in "$DOTFILES_DIR"/*; do
     config_name=$(basename "$config")
-    
+
     case "$config_name" in
         "install.sh"|"README.md"|".git"|".gitignore")
             continue
