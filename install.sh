@@ -1,0 +1,24 @@
+#!/bin/bash
+
+DOTFILES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+echo ":: Deploying dotfiles..."
+
+mkdir -p "$HOME/.config"
+
+for config in "$DOTFILES_DIR"/*; do
+    config_name=$(basename "$config")
+    
+    case "$config_name" in
+        "install.sh"|"README.md"|".git"|".gitignore")
+            continue
+            ;;
+        *)
+            echo "-> Linking: $config_name"
+            rm -rf "$HOME/.config/$config_name" 2>/dev/null
+            ln -sf "$config" "$HOME/.config/$config_name"
+            ;;
+    esac
+done
+
+echo ":: Setup complete."
