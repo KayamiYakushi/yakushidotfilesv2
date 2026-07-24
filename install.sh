@@ -27,5 +27,5 @@ done
 
 echo ":: Setup complete."
 
-ln -sf ~/dotfiles/fastfetch ~/.config/fastfetch
-ln -sf ~/dotfiles/.bashrc ~/.bashrc
+ln -sf "$DOTFILES_DIR/fastfetch" "$HOME/.config/fastfetch"
+ln -sf "$DOTFILES_DIR/.bashrc" "$HOME/.bashrc"
