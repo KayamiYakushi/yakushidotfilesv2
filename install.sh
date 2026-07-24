@@ -2,7 +2,7 @@
 set -e
 
 DOTFILES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-PACKAGES=(hyprland waybar rofi kitty cava git curl)
+PACKAGES=(fastfetch hyprland waybar rofi kitty cava git curl)
 
 echo ":: Installing packages..."
 sudo pacman -S --needed --noconfirm "${PACKAGES[@]}"
@@ -14,7 +14,7 @@ for config in "$DOTFILES_DIR"/*; do
     config_name=$(basename "$config")
 
     case "$config_name" in
-        "install.sh"|"README.md"|".git"|".gitignore")
+        "install.sh"|"README.md"|".git"|".gitignore"|".bashrc")
             continue
             ;;
         *)
@@ -26,3 +26,6 @@ for config in "$DOTFILES_DIR"/*; do
 done
 
 echo ":: Setup complete."
+
+ln -sf ~/dotfiles/fastfetch ~/.config/fastfetch
+ln -sf ~/dotfiles/.bashrc ~/.bashrc
